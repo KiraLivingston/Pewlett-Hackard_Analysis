@@ -1,0 +1,85 @@
+Departments
+-
+dept_no varchar pk
+dept_name varchar
+
+Dept_Emp
+-
+emp_no int pk FK >- Employees.emp_no
+dept_no varchar pk fk - Departments.dept_no
+from_date date
+to_date date
+
+Employees
+-
+emp_no int pk fk - Salaries.emp_no
+birth_date date
+first_name varchar
+last_name varchar
+gender varchar
+hire_date date
+
+Salaries
+-
+emp_no int pk fk - Titles.emp_no
+salary int
+from_date date
+to_date date
+
+Managers
+-
+dept_no varchar pk fk - Departments.dept_no
+emp_no int pk FK >- Salaries.emp_no
+from_date date
+to_date date
+
+Titles
+-
+emp_no int pk FK >- Dept_Emp.emp_no
+title varchar
+from_date title
+to_date title
+
+
+
+
+
+
+
+SELECT * FROM titles
+
+SELECT * FROM salaries
+
+SELECT * FROM employees
+SELECT * FROM dept_manager
+SELECT * FROM dept_emp
+SELECT * FROM departments
+DROP TABLE dept_emp
+CASCADE;
+DROP TABLE titles
+CASCADE;
+DROP TABLE salaries
+CASCADE;
+
+CREATE TABLE salaries (
+  emp_no INT NOT NULL,
+  salary INT NOT NULL,
+  from_date DATE NOT NULL,
+  to_date DATE NOT NULL,
+  FOREIGN KEY (emp_no) REFERENCES employees (emp_no),
+  PRIMARY KEY (emp_no)
+);
+
+CREATE TABLE titles (
+	emp_no INT NOT NULL,
+	title VARCHAR NOT NULL,
+	from_date DATE NOT NULL,
+	to_date DATE NOT NULL	
+);
+
+CREATE TABLE dept_emp (
+	emp_no INT NOT NULL,
+	dept_no VARCHAR(4) NOT NULL,
+	from_date DATE NOT NULL,
+	to_date DATE NOT NULL
+);
